@@ -5,6 +5,12 @@ class TrackRecord {
 	Range startEndTansctionCode;
 	int transferCode;
 	int statusCode;
+	
+	TrackRecord(Range startEndTansctionCode, int transferCode, int statusCode  ) {
+		startEndTansctionCode = startEndTansctionCode;
+		transferCode = transferCode;
+		statusCode = statusCode;
+	}
 }
 
 public class TrackingRecord {
@@ -15,12 +21,36 @@ public class TrackingRecord {
 		trackRecords = new ArrayList<TrackRecord>();
 	}
 	
+	public enum Relation {
+        SUBSET, SUPERSET, LESSOVERLAP, MOREOVERLAP, LESSDISJOINT, MOREDISJOINT, SAME;
+    }
+		
+
 	public displayTrackRecords() {
 		
 	}
 	
-	public updateTrackRecord() {
-		
+	public updateTrackRecord(TrackRecord trackRecord) {
+		foreach( TrackRecord tRecord : trackRecords) {
+			Switch(track.startEndTansctionCode.classify(trackRcord.startEndTansctionCode))
+			{
+				case Relation.SUBSET: 		updateTrackRecordSubset();
+									    	break;
+				case Relation.SUPERSET:		updateTrackRecordSuperset();
+											break;
+				case Relation.LESSOVERLAP:	updateTrackRecordlessOverLap();
+											break;
+				case Relation.MOREOVERLAP: 	updateTrackRecordMoreOverlap();
+											break;
+				case Relation.LESSDISJOINT: updateTrackRecordLessDisjoint();
+											break;
+				case Relation.MOREDISJOINT: updateTrackRecordMoreDisjoint();
+											break;
+				case Relation.SAME: 		updateTrackRecordSame();
+											break;				
+											
+			}
+		}
 	}
 	
 	private mergeRecords() {
