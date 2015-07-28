@@ -26,17 +26,17 @@ public class TrackingRecord {
     }
 		
 
-	public display() {
-		foreach( TrackRecord tRecord : trackRecords) {
-			System.out.println(tRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi,tRecord.transferCode , tRecord.statusCode );
+	public void display() {
+		for (TrackRecord tRecord : trackRecords) {
+			System.out.println(tRecord.startEndTansctionCode.lo +" "+tRecord.startEndTansctionCode.hi+" "+tRecord.transferCode +" "+ tRecord.statusCode );
 		}
 	}
 	
-	public updateTrackRecord(TrackRecord addtrackRecord) {
+	public void updateTrackRecord(TrackRecord addtrackRecord) {
 		ArrayList<TrackRecord> updatedtrackRecords = new ArrayList<TrackRecord>();
 		
-		foreach( TrackRecord tRecord : trackRecords) {
-			Switch(track.startEndTansctionCode.classify(addtrackRcord.startEndTansctionCode))
+		for ( TrackRecord tRecord : trackRecords) {
+			switch(tRecord.startEndTansctionCode.classify(addtrackRecord.startEndTansctionCode))
 			{
 				case Relation.SUBSET: 		updateTrackRecordSubset(tRecord, addtrackRecord, updatedtrackRecords);
 									    	break;
@@ -52,7 +52,7 @@ public class TrackingRecord {
 											break;
 				case Relation.SAME: 		updateTrackRecordSame();
 											break;				
-				case default:				updatedtrackRecords.add(tRecord);
+				default:				updatedtrackRecords.add(tRecord);
 											break;							
 			}
 		}
@@ -61,7 +61,7 @@ public class TrackingRecord {
 	}
 	
 	
-	public updateTrackRecordSubset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordSubset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo,addtrackRecord.startEndTansctionCode.hi -1), tRecord.transferCode , tRecord.statusCode));
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
@@ -70,42 +70,42 @@ public class TrackingRecord {
 	}
 
 	
-	public updateTrackRecordSuperset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordSuperset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
-	public updateTrackRecordlessOverLap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordlessOverLap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.lo -1), tRecord.transferCode , tRecord.statusCode));
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
-	public updateTrackRecordMoreOverlap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordMoreOverlap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
 	}
 
-	public updateTrackRecordLessDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordLessDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
 		//updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 		
 	}
-	public updateTrackRecordMoreDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordMoreDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
 	
-	public updateTrackRecordSame(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	public void updateTrackRecordSame(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
 		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 		
 	}
 
-	private mergeRecords() {
+	private void mergeRecords() {
 		
 	}
 	
@@ -115,7 +115,7 @@ public class TrackingRecord {
 		int lo = Integer.parseInt(record[0]);
 		int hi = Integer.parseInt(record[1]);	
 
-		return new TrackRecord(new Range(lo,hi),record[2],record[3]);
+		return new TrackRecord(new Range(lo,hi),Integer.parseInt(record[2]),Integer.parseInt(record[3]));
 	}
 	
 	public static void main(String[] args) throws IOException
