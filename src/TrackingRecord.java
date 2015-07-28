@@ -58,58 +58,48 @@ public class TrackingRecord {
 	
 	public updateTrackRecordSubset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo,addtrackRecord.startEndTansctionCode.hi -1), tRecord.transferCode , tRecord.statusCode));
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo,addtrackRecord.startEndTansctionCode.hi -1), tRecord.transferCode , tRecord.statusCode));
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
+		
 	}
-<<<<<<< HEAD
+
 	
 	public updateTrackRecordSuperset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
 	public updateTrackRecordlessOverLap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.lo -1), tRecord.transferCode , tRecord.statusCode));
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
 	public updateTrackRecordMoreOverlap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
 	}
 
 	public updateTrackRecordLessDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
+		//updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+		
 	}
 	public updateTrackRecordMoreDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
 	}
 	
 	
 	public updateTrackRecordSame(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
 	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
-		}
+		updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+		
 	}
-	
-=======
->>>>>>> 54c72fcc6dd7260d2e6515f79547b351f24f454f
+
 	private mergeRecords() {
 		
 	}
