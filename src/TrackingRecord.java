@@ -1,91 +1,60 @@
 import java.io.*;
 import java.util.*;
 
-class TrackRecord {
-	Range startEndTansctionCode;
-	int transferCode;
-	int statusCode;
-	
-	TrackRecord(Range startEndTansctionCode, int transferCode, int statusCode  ) {
-		startEndTansctionCode = startEndTansctionCode;
-		transferCode = transferCode;
-		statusCode = statusCode;
-	}
-}
-
 public class TrackingRecord {
-	
-	ArrayList<TrackRecord> trackRecords;
-	
-	TrackingRecord() {
-		trackRecords = new ArrayList<TrackRecord>();
-	}
-	
-	public enum Relation {
-        SUBSET, SUPERSET, LESSOVERLAP, MOREOVERLAP, LESSDISJOINT, MOREDISJOINT, SAME;
-    }
-		
 
-	public displayTrackRecords() {
-		
+	private ArrayList<Integer> lo = new ArrayList<Integer>();
+	private ArrayList<Integer> hi = new ArrayList<Integer>();
+	private ArrayList<String> status = new ArrayList<String>();
+	private ArrayList<Integer> trackingNumber = new ArrayList<Integer>();
+	
+	public void putRecord(int lo, int hi, String status, int trackingNumber)
+	{
+		this.lo.add(lo);
+		this.hi.add(hi);
+		this.status.add(status);
+		this.trackingNumber.add(trackingNumber);
 	}
 	
-	public updateTrackRecord(TrackRecord addtrackRecord) {
-		ArrayList<TrackRecord> updatedtrackRecords = new ArrayList<TrackRecord>();
-		
-		foreach( TrackRecord tRecord : trackRecords) {
-			Switch(track.startEndTansctionCode.classify(addtrackRcord.startEndTansctionCode))
+	public ArrayList<Integer> getLo()
+	{
+		return lo;
+	}
+	
+	public ArrayList<Integer> getHi()
+	{
+		return hi;
+	}
+	
+	public ArrayList<String> getStatus()
+	{
+		return status;
+	}
+	public ArrayList<Integer> getTrackingNumber()
+	{
+		return trackingNumber;
+	}
+	
+	public void optimizeRecords()
+	{
+		for(int i=0; i<lo.size(); i++)
+		{
+			if(i>0)
 			{
-				case Relation.SUBSET: 		updateTrackRecordSubset(tRecord, addtrackRecord, updatedtrackRecords);
-									    	break;
-				case Relation.SUPERSET:		updateTrackRecordSuperset();
-											break;
-				case Relation.LESSOVERLAP:	updateTrackRecordlessOverLap();
-											break;
-				case Relation.MOREOVERLAP: 	updateTrackRecordMoreOverlap();
-											break;
-				case Relation.LESSDISJOINT: updateTrackRecordLessDisjoint();
-											break;
-				case Relation.MOREDISJOINT: updateTrackRecordMoreDisjoint();
-											break;
-				case Relation.SAME: 		updateTrackRecordSame();
-											break;				
-											
+				for(int j=0; j<i; j++)
+				{
+					if(lo.get(j) > lo.get(i) && hi.get(i) > hi.get(j))
+					{
+						lo.remove(j);
+						hi.remove(j);
+						status.remove(j);
+						trackingNumber.remove(j);
+					}
+						
+				}
 			}
 		}
 	}
-	
-	
-	public updateTrackRecordSubset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
-	{
-		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
-			updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo,addtrackRecord.startEndTansctionCode.hi -1), tRecord.transferCode , tRecord.statusCode));
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
-			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
-		}
-	}
-	private mergeRecords() {
-		
-	}
-	
-	
-	public static void main(String[] args) throws IOException
-	{
-		File file = new File("c:/input.txt");
-		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			for(String line; (line = br.readLine()) != null; ) {
-				System.out.println(line);
-		    }
-		}
-		finally {
-			
-		}
-		
-	}
-	
-	
 }
 	
 
