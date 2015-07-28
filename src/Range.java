@@ -4,8 +4,8 @@
  * ----------------------------------------------------*/
 public class Range {
 
-    protected int lo;
-    protected int hi;
+    public int lo;
+    public int hi;
 
     Range() {}
     

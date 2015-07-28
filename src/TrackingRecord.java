@@ -30,11 +30,13 @@ public class TrackingRecord {
 		
 	}
 	
-	public updateTrackRecord(TrackRecord trackRecord) {
+	public updateTrackRecord(TrackRecord addtrackRecord) {
+		ArrayList<TrackRecord> updatedtrackRecords = new ArrayList<TrackRecord>();
+		
 		foreach( TrackRecord tRecord : trackRecords) {
-			Switch(track.startEndTansctionCode.classify(trackRcord.startEndTansctionCode))
+			Switch(track.startEndTansctionCode.classify(addtrackRcord.startEndTansctionCode))
 			{
-				case Relation.SUBSET: 		updateTrackRecordSubset();
+				case Relation.SUBSET: 		updateTrackRecordSubset(tRecord, addtrackRecord, updatedtrackRecords);
 									    	break;
 				case Relation.SUPERSET:		updateTrackRecordSuperset();
 											break;
@@ -53,6 +55,15 @@ public class TrackingRecord {
 		}
 	}
 	
+	
+	public updateTrackRecordSubset(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	{
+		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
+			updatedtrackRecords.add(new TrackRecord(new Range(tRecord.startEndTansctionCode.lo,addtrackRecord.startEndTansctionCode.hi -1), tRecord.transferCode , tRecord.statusCode));
+			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.hi+1, tRecord.startEndTansctionCode.hi), tRecord.transferCode , tRecord.statusCode));
+		}
+	}
 	private mergeRecords() {
 		
 	}
