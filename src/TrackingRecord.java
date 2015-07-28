@@ -26,7 +26,7 @@ public class TrackingRecord {
     }
 		
 
-	public displayTrackRecords() {
+	public display() {
 		foreach( TrackRecord tRecord : trackRecords) {
 			System.out.println(tRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi,tRecord.transferCode , tRecord.statusCode );
 		}
@@ -127,6 +127,8 @@ public class TrackingRecord {
 			for(String line; (line = br.readLine()) != null; ) {
 				trackingInfo.updateTrackRecord(convertStringToTrackObject(line));
 		    }
+			trackingInfo.display();
+		}
 		finally {
 			
 		}
