@@ -27,7 +27,9 @@ public class TrackingRecord {
 		
 
 	public displayTrackRecords() {
-		
+		foreach( TrackRecord tRecord : trackRecords) {
+			System.out.println(tRecord.startEndTansctionCode.lo, tRecord.startEndTansctionCode.hi,tRecord.transferCode , tRecord.statusCode );
+		}
 	}
 	
 	public updateTrackRecord(TrackRecord addtrackRecord) {
@@ -50,9 +52,12 @@ public class TrackingRecord {
 											break;
 				case Relation.SAME: 		updateTrackRecordSame();
 											break;				
-											
+				case default:				updatedtrackRecords.add(tRecord);
+											break;							
 			}
 		}
+		
+		trackRecords = updatedtrackRecords;
 	}
 	
 	
@@ -104,17 +109,24 @@ public class TrackingRecord {
 		
 	}
 	
+	public TrackRecord  convertStringToTrackObject(String line)
+	{
+		String[] record = line.split(" ");
+		int lo = Integer.parseInt(record[0]);
+		int hi = Integer.parseInt(record[1]);	
+
+		return new TrackRecord(new Range(lo,hi),record[2],record[3]);
+	}
 	
 	public static void main(String[] args) throws IOException
 	{
 		File file = new File("c:/input.txt");
-		
+		TrackingRecord trackingInfo = new TrackingRecord();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			for(String line; (line = br.readLine()) != null; ) {
-				System.out.println(line);
+				trackingInfo.updateTrackRecord(convertStringToTrackObject(line));
 		    }
-		}
 		finally {
 			
 		}
