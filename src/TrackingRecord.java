@@ -79,6 +79,34 @@ public class TrackingRecord {
 		}
 	}
 	
+	public updateTrackRecordMoreOverlap(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	{
+		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
+			
+		}
+	}
+
+	public updateTrackRecordLessDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	{
+		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
+			
+		}
+	}
+	public updateTrackRecordMoreDisjoint(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	{
+		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
+			
+		}
+	}
+	
+	
+	public updateTrackRecordSame(TrackRecord tRecord, TrackRecord addtrackRecord, ArrayList<TrackRecord> updatedtrackRecords )
+	{
+		if ((addtrackRecord.transferCode != tRecord.transferCode) || ( addtrackRecord.statusCode != tRecord.statusCode)) {
+			updatedtrackRecords.add(new TrackRecord(new Range(addtrackRecord.startEndTansctionCode.lo, addtrackRecord.startEndTansctionCode.hi), addtrackRecord.transferCode , addtrackRecord.statusCode));
+		}
+	}
+	
 	private mergeRecords() {
 		
 	}
